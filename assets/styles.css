@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap'); */
+
+:root {
+  --defaultSize: 28px;
+  --h1size: 2.5em;
+  --h2size: 1.6em;
+  --h3size: 1.4em;
+  --h4size: 1.3em;
+  --defaultColor: #000;
+  --defaultBgColor: #fff;
+  /* --headlineTextTransform: capitalize; */
+  --headlineTextTransform: none;
+  --emColor: darkorange;
+}
+
+.slide-background-content {
+  background-color: var(--defaultBgColor) !important;
+}
+
+.reveal section img {
+  border: 0;
+  box-shadow: 0 0 0 !important;
+}
+
+.reveal section, h1, h2, h3, h4, h5 {
+  font-family: 'Lora', 'Times New Roman', Times, serif !important;
+  color: var(--defaultColor) !important;
+  text-transform:var(--headlineTextTransform) !important;
+  background-color: var(--defaultBgColor) !important;
+}
+
+.reveal section {
+  font-size: var(--defaultSize) !important;
+}
+
+.reveal section h1 {
+  font-size: var(--h1size) !important;
+}
+.reveal section h2 {
+
+  font-size: var(--h2size) !important;
+}
+.reveal section h3 {
+
+  font-size: var(--h3size) !important;
+}
+.reveal section h4 {
+
+  font-size: var(--h4sizse) !important;
+}
+.reveal section h5 {
+
+  font-size: var(--h5size) !important;
+}
+
+.inverted {
+  color: var(--defaultBgColor) !important;
+  background-color: var(--defaultColor) !important;
+}
+
+.inverted > h1 {
+  margin: 0 !important;
+}
+
+strong {
+  font-weight: 600 !important;
+}
+
+em {
+  color: var(--emColor) !important;
+}
+
+em {
+  display: inline !important;
+  font-style: italic !important;
+}
+
+.reveal section blockquote {
+  border-left: 10px solid rgba(225, 225, 225, .8) !important;
+}
+
+.reveal section blockquote p {
+  display: inline !important;
+  font-style: italic !important;
+}
+
+.reveal section blockquote footer {
+  text-align:right !important;
+  padding-right:1em !important; 
+  margin-top: .5em !important;
+  opacity: 0.6 !important;
+}
+
+.reveal section blockquote footer::before {
+  content: "- ";
+}
+
+.date {
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+}
+
+#title-slide > .subtitle {
+  font-size: var(--h2size);
+  color: var(--emColor); 
+}
+
+#title-slide > .author {
+  font-size: var(--defaultSize);
+}
+
+code {
+  background-color: rgba(9, 30, 66, 0.03);
+}

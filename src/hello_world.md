@@ -3,7 +3,7 @@ author: First Last &#58;&#58; MyCompany
 title: Realjs Markdown Template 
 subtitle: Markdown to HTML with Pandoc 
 date: 2020-09-09
-css: ./assets/styles.css
+css: ./styles.css
 ---
 
 # First Section
@@ -55,4 +55,17 @@ fn main() {
     // Print text to the console
     println!("Hello World!");
 }
+```
+
+## Mermaid diagrams
+
+```mermaid
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
 ```

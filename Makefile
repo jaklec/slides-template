@@ -1,24 +1,45 @@
-.PHONY: all build clean
+.PHONY: all init revealjs mermaidjs clean css build
 
-CSS=assets/*.css
-TARGET_DIR=target
-SOURCES=$(wildcard src/*.md)
-TARGETS=$(patsubst src/%.md, target/%.html, $(SOURCES))
+ASSDIR=assets
+CUSTCSS=styles.css
+SRCDIR=src
+TARGDIR=target
+BLDDIR=$(TARGDIR)/build
+SRCS=$(wildcard $(SRCDIR)/*.md)
+DECK=$(SRCS:$(SRCDIR)/%.md=$(TARGDIR)/%.html)
 
-all: build
+all: $(BLDDIR)/$(CUSTCSS) $(DECK)
 
-build: $(TARGETS)
-
-$(TARGET_DIR)/%.html: $(SOURCES) $(CSS) | $(TARGET_DIR)
-	pandoc --self-contained -s -t revealjs "$<" -o $@ \
+$(TARGDIR)/%.html: $(BLDDIR)/%.md
+	@cd $(BLDDIR) && pandoc --embed-resources --standalone -t revealjs "$(notdir $<)" -o ../$(notdir $@) \
 		--slide-level 2 \
 		-V theme=white \
 		-V transition=ease \
 		-V transitionSpeed=fast \
-		-V progress=true;
+		-V progress=true \
+		-V revealjs-url=../../assets/reveal.js;
+	@echo "===> Success: $@"
 
-$(TARGET_DIR):
-	mkdir $@
+$(BLDDIR)/%.md: $(SRCDIR)/%.md | $(BLDDIR)
+	@npx mmdc -i $< -o $@
+
+$(BLDDIR)/$(CUSTCSS): $(ASSDIR)/$(CUSTCSS) | $(BLDDIR)
+	@rsync $< $(BLDDIR)/
+
+$(BLDDIR):
+	@mkdir -p $@
+
+init: revealjs mermaidjs
+
+revealjs:
+	@curl -OL https://github.com/hakimel/reveal.js/archive/master.tar.gz
+	@tar -xzvf master.tar.gz
+	@mv reveal.js-master ./assets/reveal.js
+	@rm master.tar.gz
+
+mermaidjs:
+	@npm init -y
+	@npm install @mermaid-js/mermaid-cli run
 
 clean:
-	rm -rf $(TARGET_DIR) 
+	rm -rf $(TARGDIR) 
